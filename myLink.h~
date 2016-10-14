@@ -1,0 +1,19 @@
+struct node {
+  int i;
+  struct node *next;
+};
+void print_list(struct node *list);
+
+struct node *insert_front(struct node *list, int new);
+
+struct node *insert_order(struct node *list,int new);
+
+struct node *findSong(char name[]);
+
+struct node *firstArtSong(char artist[]);
+
+struct node *rng(struct node *list);
+
+struct node *remove(struct  node *ist);
+
+struct node *free_list(struct  node *list);
