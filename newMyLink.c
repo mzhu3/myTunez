@@ -32,6 +32,7 @@ struct song_node *insert_order(struct song_node *list, char *name, char *artist)
   song_node *new = (song_node *)malloc(sizeof(song_node));
   strcpy(new ->name,name);
   strcpy(new ->artist,artist);
+  
   if(strcmp(nameSong, strcat(current ->artist,current ->name))<0){
     list = insert_front(current,new->name,new ->artist);
     return list;
@@ -83,10 +84,11 @@ int main(){
   n2 -> next = n3;
   n3 ->next = NULL;
 
+  printf("printing n1:\n\n");
   print_list(n1);
-
+  printf("\n");
+  printf("insertfront : Dumbells - Leon :\n\n");
   n1 = insert_front(n1,"Dumbells","Leon");
-
   print_list(n1);
 
   n1 = insert_order(n1,"Hello", "Leon");
