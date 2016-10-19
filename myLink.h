@@ -1,19 +1,19 @@
-typedef struct node {
-  int i;
-  struct node *next;
-} node;
-void print_list(node *list);
+#ifndef LINK_LIST_H
+#define LINK_LIST_H
 
-node *insert_front(node *list, node * new);
+typedef struct song_node {
+  char name[256];
+  char artist[256];
+  struct song_node *next;
+} song_node;
 
-node *insert_order(node *list,node * new);
+struct song_node * insert_front( struct song_node * list, char * name, char * artist );
+struct song_node * insert_order( struct song_node * list, char * name, char * artist );
+void print_list( struct song_node * list );
+struct song_node * findSong( struct song_node * list, char * name );
+struct song_node * findArtist( struct song_node * list, char * artist );
+struct song_node * randomNode( struct song_node * node );
+struct song_node * removeNode( struct song_node * list, char * name );
+struct song_node * free_all( struct song_node * list );
 
-node *findSong(node *list,char name[]);
-
-node *firstArtSong(node *list,char artist[]);
-
-node *rng(node *list);
-
-node *remove(node *ist);
-
-node *free_list(node *list);
+#endif
