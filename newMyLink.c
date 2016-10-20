@@ -127,7 +127,7 @@ struct song_node *freeAll(song_node * list){
   return NULL;
   
 }
-int main(){
+/*int main(){
   song_node *n1 = (song_node *) malloc(sizeof(song_node));
   song_node *n2 = (song_node *) malloc (sizeof(song_node));
   song_node *n3 = (song_node *) malloc (sizeof(song_node));
@@ -170,3 +170,4 @@ int main(){
    print_list(n1);
   return 0;
 }
+*/
