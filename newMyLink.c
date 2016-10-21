@@ -9,10 +9,10 @@ void print_list(struct song_node *list){
     printf("]\n");
   }else{
   while(list->next){
-    printf("%s - %s,", list -> name, list -> artist);
+    printf("%s - %s,", list -> artist, list -> name);
     list = list ->next;
   }
-  printf("%s - %s", list ->name, list ->artist);
+  printf("%s - %s", list ->artist, list ->name);
   printf("]\n");
   }
 }
@@ -28,28 +28,33 @@ struct song_node *insert_front(struct song_node *list, char *name, char *artist)
 
 struct song_node *insert_order(struct song_node *list, char *name, char *artist){
   
-  if(strcmp(name, list -> name)<0){
+  if(strcmp(name, list -> name)<0|| list ==NULL){
     return insert_front(list,name,artist);
   }
   song_node *current = list;
   song_node *new = (song_node *)malloc (sizeof(song_node));
+  song_node *prev = NULL;
   strcpy(new ->name,name);
   strcpy(new->artist,artist);
-  new ->next = NULL;
   
-  while(current ->next){
-    if(strcmp(name,current->next ->name)<0){
-      song_node * temp = insert_front(current ->next ,name,artist);
-      current ->next = temp;
-      return list;
+  while(current->next){
+    if(strcmp(name,current->next ->name)>0){
+      current = current ->next;
     }
-    list = list ->next;
-    
+    else{
+      break;
+    }
   }
-  list ->next = new;
+  if(current != NULL){
+    new ->next = current ->next;
+    current ->next = new;
+  }
+  else{
+    current ->next = new;
+  }
   return list;
 }
-struct song_node *findSong(song_node *list, char name[]){
+struct song_node *findSong(song_node *list, char *name){
   song_node *temp = list;
   if(temp->next && strcmp(temp->name,name)){
     findSong(temp ->next, name);
@@ -63,7 +68,7 @@ struct song_node *findSong(song_node *list, char name[]){
     return NULL;
   }
 }
-struct song_node *findArtist(song_node * list, char artist[]){
+struct song_node *findArtist(song_node * list, char *artist){
   song_node *temp = list;
   if(temp->next && strcmp(temp->artist,artist)){
     findArtist(temp ->next, artist);
@@ -129,20 +134,10 @@ struct song_node *freeAll(song_node * list){
 }
 /*int main(){
   song_node *n1 = (song_node *) malloc(sizeof(song_node));
-  song_node *n2 = (song_node *) malloc (sizeof(song_node));
-  song_node *n3 = (song_node *) malloc (sizeof(song_node));
-  
-  
-  strcpy(n1-> name, "aba");
+  strcpy(n1->name,"lol");
   strcpy(n1->artist,"Leon");
-  strcpy(n2 ->name, "bab");
-  strcpy(n2 -> artist, "Leon");
-  strcpy(n3 -> name, "ppap");
-  strcpy(n3 -> artist, "Leon");
-
-  n1->next = n2;
-  n2 -> next = n3;
-  n3 ->next = NULL;
+  n1 = insert_order(n1,"hi","Leon");
+  n1 = insert_order(n1,"bye","Leon");
 
   printf("printing n1:\n\n");
   print_list(n1);
@@ -151,10 +146,16 @@ struct song_node *freeAll(song_node * list){
   n1 = insert_front(n1,"Dumbells","Leon");
   print_list(n1);
 
+  printf("insertOrder:Hello\n");
   n1 = insert_order(n1,"Hello", "Leon");
 
   print_list(n1);
-
+  printf("insertOrder:zzzz\n");
+  n1 = insert_order(n1,"zzzz","Leon");
+  print_list(n1);
+    printf("insertOrder:Bye\n");
+  n1 = insert_order(n1,"Bye", "Leon");
+  print_list(n1);
   printf("finding hello: %s\n",findSong(n1,"Hello"));
   printf("finding Leon: %s\n",findArtist(n1,"Leon"));
   printf("finding leon: %s\n",findArtist(n1,"leon"));
@@ -171,3 +172,5 @@ struct song_node *freeAll(song_node * list){
   return 0;
 }
 */
+
+

@@ -1,17 +1,20 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "myLink.h"
 #include "myTune.h"
 #include <ctype.h>
-void * add(song_node *list, char * name[],char * artist[]){
-  int row = tolower(name[0]) %'a';
+
+void * addSong(song_node *table[], char * name,char * artist){
+  int row = tolower(artist[0])-97;
   table[row] = insert_order(table[row],name,artist);
+  return table;
 }
 
-song_node * searchSong(song_node *list, char *name[]){
+song_node * searchSong(song_node *table[], char *name){
   int i;
   song_node *temp;
-  for(i = 0; i < 26, i ++){
+  for(i = 0; i < 26; i ++){
     temp = findSong(table[i], name);
     if(temp){
       return temp;
@@ -21,10 +24,10 @@ song_node * searchSong(song_node *list, char *name[]){
   return NULL;
 }
 
-song_node * searchArt(song_node * list, char *artist[]){
+song_node * searchArt(song_node * table[], char *artist){
   int i;
   song_node *temp;
-  for(i = 0; i <26, i ++){
+  for(i = 0; i <26; i ++){
     temp = findArtist(table[i],artist);
     if(temp){
       return temp;
@@ -34,18 +37,18 @@ song_node * searchArt(song_node * list, char *artist[]){
   return NULL;
 }
 
-void * print_letterSong(song_node *list, char *letter[]){
-  char lowerLetter = tolower(letter);
-  int row = lowerLetter %'a';
+void * print_letterSong(song_node *table[], char *letter){
+  int row = tolower(* letter) - 97;
   print_list(table[row]);
 }
 
-void * print_artSong(song_node *list, char *artist[]){
-  char lowerArt = tolower(artist);
-  int row = lowerArt[0] % 'a';
+void * print_artSong(song_node *table[], char *artist){
+  char *cpy;
+  strcpy(cpy,artist);
+  int row = tolower(* artist) -97;
   printf("[");
   while(table[row]){
-    if(!strcmp(artist,table[row]->artist)){
+    if(!strcmp(cpy,table[row]->artist)){
       if(table[row]->next){
 	printf("%s - %s,",table[row]->name,table[row]->artist);
       }
@@ -60,19 +63,23 @@ void * print_artSong(song_node *list, char *artist[]){
   printf("]\n");
 }
 
-void * print_lib(song_node *list[]){
+void * printLib(song_node *table[]){
   int i;
-  char init;
-  for(i = 0; i<26, i++){
+  for(i = 0; i<26; i++){
+    printf("%c List:\n",i+97);
     print_list(table[i]);
+    
   }
 }
     
 
 int main(){
-  print_lib(table);
-  add(table,"Hello","Kelvin");
-  print_lib(table);
+  printf("empty table:\n");
+  printLib(table);
+  printf("clear");
+  addSong(table,"hello","kelvin");
+  printf("added one song\n");
+  printLib(table);
   
 
   return 0;

@@ -5,22 +5,22 @@
 
 song_node *table[26];
 
-void * add(song_node *list, char *name[],char *);
+void * add(song_node *table[], char *name,char *artist);
 
-song_node * searchSong(song_node *list, char *name[]);
+song_node * searchSong(song_node *table[], char *name);
 
-song_node * searchArt(song_node *list, char *artist[]);
+song_node * searchArt(song_node *table[], char *artist);
 
-void *print_letterSong(song_node *list, char *letter[]);
+void *print_letterSong(song_node *table[], char *letter);
 
-void *print_artSong(song_node *list, char *artist[]);
+void *print_artSong(song_node *table[], char *artist);
 
-void * print_lib(song_node *list);
+void * print_lib(song_node *table[]);
 
-song_node *shuffle(song_node *list);
+song_node *shuffle(song_node *table[]);
 
-song_node *delete_song(song_node *list, char *name[]);
+song_node *delete_song(song_node *table[], char *name);
 
-song_node *deleteAll(song_node *list);
+song_node *deleteAll(song_node *table[]);
 
 #endif
