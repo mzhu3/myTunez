@@ -1,5 +1,5 @@
 test: myTunez.c
-	gcc newMyLink.c myTunez.c -o test
+	gcc main.c newMyLink.c myTunez.c -o test
 
 run: test
 	./test
