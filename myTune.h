@@ -17,10 +17,10 @@ void *print_artSong(song_node *table[], char *artist);
 
 void * print_lib(song_node *table[]);
 
-song_node *shuffle(song_node *table[]);
+void *shuffle(song_node *table[]);
 
-song_node *delete_song(song_node *table[], char *name);
+void *delete_song(song_node *table[], char *name);
 
-song_node *deleteAll(song_node *table[]);
+void *deleteAll(song_node *table[]);
 
 #endif
